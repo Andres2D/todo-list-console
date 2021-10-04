@@ -25,7 +25,7 @@ const main = async() => {
                 tasks.cretaeTask(desc);
             break;
             case '2':
-                console.log(tasks.listArr);
+                tasks.completeList();
             break;
         }
 
@@ -33,8 +33,6 @@ const main = async() => {
 
         await pause();
     }while(opt !== '0');
-    // pause();
-
 }
 
 main();

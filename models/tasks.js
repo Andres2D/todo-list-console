@@ -1,4 +1,5 @@
 const Task = require("./task");
+const colors = require('colors');
 
 /**
  * _list: 
@@ -33,6 +34,17 @@ class Tasks {
         tasks.forEach( task => {
             this._list[task.id] = task;
         }); 
+    }
+
+    completeList() {
+        console.log();
+        this.listArr.forEach( (task, index) => {
+            const {description, completedIn} = task;
+            const taskOutput = `${colors.green(index+1)}: ${description} :: ${(completedIn !== null) 
+                                                                    ? 'Completed'.green 
+                                                                    : 'Pending'.red}`;
+            console.log(taskOutput);
+        });
     }
 }
 
