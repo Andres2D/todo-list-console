@@ -1,7 +1,7 @@
 
 // const {showMenu, pause} = require('./helpers/messages');
 
-const { inquirerMenu, pause, readInput } = require("./helpers/inquirer");
+const { inquirerMenu, pause, readInput, deleteTaskQuestions, confirm } = require("./helpers/inquirer");
 const { saveDB, readDB } = require("./helpers/saveFile");
 const Tasks = require("./models/tasks");
 
@@ -26,6 +26,23 @@ const main = async() => {
             break;
             case '2':
                 tasks.completeList();
+            break;
+            case '3':
+                tasks.listFromTaskStatus(true);
+            break;
+            case '4':
+                tasks.listFromTaskStatus(false);
+            break; 
+            case '6':
+                const id = await deleteTaskQuestions(tasks.listArr);
+                if(id !== '0') {
+                    const ok = await confirm('Are you sure?');
+    
+                    if(ok) {
+                        tasks.deleteTask(id);
+                        console.log('Task deleted'.green);
+                    }
+                }
             break;
         }
 

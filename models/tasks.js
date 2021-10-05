@@ -46,6 +46,28 @@ class Tasks {
             console.log(taskOutput);
         });
     }
+
+    listFromTaskStatus(completed = true) {
+        console.log();
+
+        const list = completed 
+            ? this.listArr.filter(t => t.completedIn !== null)
+            : this.listArr.filter(t => t.completedIn === null); 
+
+        list.forEach( (task, index) => {
+            const {description, completedIn} = task;
+            const taskOutput = `${colors.green(index+1)}: ${description} :: ${(completedIn !== null) 
+                                                                    ? `${completedIn}`.green
+                                                                    : 'Pending'.red}`;
+            console.log(taskOutput);
+        });
+    }
+
+    deleteTask(id = '') {
+        if(this._list[id]) {
+            delete this._list[id];
+        }
+    }
 }
 
 module.exports = Tasks;
