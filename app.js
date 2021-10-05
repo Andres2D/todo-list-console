@@ -1,7 +1,7 @@
 
 // const {showMenu, pause} = require('./helpers/messages');
 
-const { inquirerMenu, pause, readInput, deleteTaskQuestions, confirm } = require("./helpers/inquirer");
+const { inquirerMenu, pause, readInput, deleteTaskQuestions, confirm, showListChecklist } = require("./helpers/inquirer");
 const { saveDB, readDB } = require("./helpers/saveFile");
 const Tasks = require("./models/tasks");
 
@@ -33,6 +33,10 @@ const main = async() => {
             case '4':
                 tasks.listFromTaskStatus(false);
             break; 
+            case '5':
+                const ids = await showListChecklist(tasks.listArr);
+                tasks.toggleCompletedTasks(ids);
+            break;
             case '6':
                 const id = await deleteTaskQuestions(tasks.listArr);
                 if(id !== '0') {
